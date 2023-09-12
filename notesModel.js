@@ -1,16 +1,16 @@
-class TodoListModel {
+class NotesModel {
   constructor(list) {
     this.list = [];
   }
-  getItems() {
+  getNotes() {
     return this.list;
   }
-  addItem(item) {
+  addNote(item) {
     this.list.push(item);
   }
-  clear(){
+  reset(){
     this.list = []
   }
 }
 
-module.exports = TodoListModel;
+module.exports = NotesModel;

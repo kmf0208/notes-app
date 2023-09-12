@@ -1,8 +1,10 @@
-const TodoListModel = require('./todoListModel')
+const NotesModel = require('./notesModel');
+const NotesView = require('./notesView');
 
-const model = new TodoListModel();
+const model = new NotesModel();
+const view = new NotesView(model);
 
 
-model.addItem('hello')
-model.clear()
-console.log(model.getItems());
+
+model.addNote('this is an example note');
+view.displayNotes();
