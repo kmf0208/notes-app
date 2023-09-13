@@ -8,3 +8,5 @@ const view = new NotesView(model);
 
 model.addNote('this is an example note');
 view.displayNotes();
+
+
