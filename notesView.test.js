@@ -31,15 +31,12 @@ describe('NotesView class' ,() => {
         const model = new NotesModel();
         const view = new NotesView(model);
       
-        // 1. Fill the input
         const input = document.querySelector('#username-input');
         input.value = 'My new amazing test note';
       
-        // 2. Click the button
         const button = document.querySelector('#show-message-button');
         button.click();
       
-        // 3. The note should be on the page
         expect(document.querySelectorAll('div.note').length).toEqual(1);
         expect(document.querySelectorAll('div.note')[0].textContent).toEqual('My new amazing test note');
       });
@@ -57,3 +54,37 @@ describe('NotesView class' ,() => {
         expect(document.querySelectorAll('div.note').length).toEqual(2);
       });
 })
+
+describe('NotesView', () => {
+  // Mock the NotesClient class
+  beforeEach(() => {
+    document.body.innerHTML = fs.readFileSync("./index.html");
+});
+  class MockNotesClient {
+    loadNotes(callback) {
+      // Simulate loading notes from the API
+      const mockNotes = ['Note 1'];
+      callback(mockNotes);
+    }
+  }
+
+  it('should fetch and display notes from the API', () => {
+    const mockModel = {
+      getNotes: jest.fn(() => []), // Provide an initial state for getNotes if needed
+      addNote: jest.fn(),
+      setNotes: jest.fn(),
+    };
+
+    
+
+    // Create a NotesView instance with the mocked NotesClient and model
+    const notesView = new NotesView(mockModel, new MockNotesClient());
+
+   
+    notesView.displayNotesFromApi();
+
+    // Assertions
+    expect(mockModel.setNotes).toHaveBeenCalledWith(['Note 1']);
+    // You can add more assertions to verify other behaviors if needed.
+  });
+});
