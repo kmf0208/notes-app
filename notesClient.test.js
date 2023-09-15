@@ -13,3 +13,4 @@ describe('NotesClient class', () => {
       });
     });
   });
+

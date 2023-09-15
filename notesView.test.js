@@ -56,35 +56,23 @@ describe('NotesView class' ,() => {
 })
 
 describe('NotesView', () => {
-  // Mock the NotesClient class
   beforeEach(() => {
     document.body.innerHTML = fs.readFileSync("./index.html");
 });
   class MockNotesClient {
     loadNotes(callback) {
-      // Simulate loading notes from the API
       const mockNotes = ['Note 1'];
       callback(mockNotes);
     }
   }
-
   it('should fetch and display notes from the API', () => {
     const mockModel = {
-      getNotes: jest.fn(() => []), // Provide an initial state for getNotes if needed
+      getNotes: jest.fn(() => []),
       addNote: jest.fn(),
       setNotes: jest.fn(),
     };
-
-    
-
-    // Create a NotesView instance with the mocked NotesClient and model
-    const notesView = new NotesView(mockModel, new MockNotesClient());
-
-   
-    notesView.displayNotesFromApi();
-
-    // Assertions
+        const notesView = new NotesView(mockModel, new MockNotesClient());
+        notesView.displayNotesFromApi();
     expect(mockModel.setNotes).toHaveBeenCalledWith(['Note 1']);
-    // You can add more assertions to verify other behaviors if needed.
   });
 });
