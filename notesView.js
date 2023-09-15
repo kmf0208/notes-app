@@ -26,7 +26,14 @@ class NotesView {
             this.mainContainerEl.append(noteEl);
         });
 
+        
     }
+
+    displayError(){
+        this.mainContainerEl.append('Hello there, This is an Error message ');
+    }
+
+    
     addNewNote(newNote){
         this.model.addNote(newNote);
         this.displayNotes();

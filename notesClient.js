@@ -1,9 +1,13 @@
+const { errorMonitor } = require("form-data");
+
 class NotesClient{
-  loadNotes(successCallback) {
+  loadNotes(successCallback, errorCallback) {
     fetch('http://localhost:3000/notes')
       .then((response) => response.json())
       .then((data) => {
         successCallback(data);
+      }).catch(error  =>{
+        errorCallback(error)
       })
   }
   
