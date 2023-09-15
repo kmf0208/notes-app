@@ -8,9 +8,17 @@ class NotesView {
 
         document.querySelector('#show-message-button').addEventListener('click', () => {
             const newNote = document.querySelector('#username-input').value;
-            this.notesClient.createNote(newNote)
-            this.addNewNote(newNote)
             document.querySelector('#username-input').value='';
+            this.notesClient.createNote(newNote).then((error) => {
+                if(error){
+                    this.displayError()
+                }
+                else{
+                    this.addNewNote(newNote)
+                    this.displayNotes()
+                }
+            })
+            
          });
     }
     displayNotes(){
@@ -30,10 +38,13 @@ class NotesView {
     }
 
     displayError(){
-        this.mainContainerEl.append('Hello there, This is an Error message ');
+        const newEl = document.createElement('div')
+        const errorMessage = 'Hello there, This is an Error message'
+        newEl.textContent = errorMessage
+        this.mainContainerEl.append(newEl);
     }
 
-    
+
     addNewNote(newNote){
         this.model.addNote(newNote);
         this.displayNotes();
